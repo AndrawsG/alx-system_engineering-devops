@@ -1,2 +1,10 @@
 #!/bin/bash
-cp -u *.htm ..
+# Get the parent directory
+parent_dir=$(dirname "$(pwd)")
+# Loop through all HTML files in the current directory
+for file in *.html; do
+    # If the file doesn't exist in the parent directory, or if it is newer, then copy it
+    if [ ! -e "$parent_dir/$file" ] || [ "$file" -nt "$parent_dir/$file" ]; then
+        cp "$file" "$parent_dir"
+    fi
+done.
